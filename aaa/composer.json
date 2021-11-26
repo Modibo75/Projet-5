@@ -1,0 +1,20 @@
+{
+    "name": "modibo/aaa",
+    "authors": [
+        {
+            "name": "Modibo75",
+            "email": "m.kante990@laposte.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Router\\": "routes/",
+            "App\\": "app/"
+            
+        }
+    },
+    "require": {}
+}
+
+
+    
