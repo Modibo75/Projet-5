@@ -1,18 +1,13 @@
 <?php
-use App\Helpers\Text;
-use App\Model\Post;
 use App\Connection;
-use App\URL;
-use App\PaginatedQuery;
+use App\Table\PostTable;
 
 $title = 'Mon Blog';
 $pdo = Connection::getPDO();
 
-$paginatedQuery = new PaginatedQuery(
-    "SELECT * FROM post ORDER BY created_at DESC",
-    "SELECT COUNT(id) FROM post"
-);
-$posts = $paginatedQuery->getItems(Post::class);
+$table = new PostTable($pdo);
+[$posts, $pagination] = $table->findPaginated();
+
 $link = $router->url('home');
 ?>
 
@@ -27,7 +22,7 @@ $link = $router->url('home');
 </div>
 
 <div class="d-flex justify-content-between my-4">
-    <?= $paginatedQuery->previousLink($link); ?>
-    <?= $paginatedQuery->nextLink($link); ?>
+    <?= $pagination->previousLink($link); ?>
+    <?= $pagination->nextLink($link); ?>
 </div>
 
